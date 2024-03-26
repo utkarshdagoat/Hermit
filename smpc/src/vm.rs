@@ -1,13 +1,10 @@
-
-
 use crate::math::mersenne::MersenneField;
 use crate::mpc::Share;
 use std::collections::HashMap;
+
 pub struct VirtualMachine<'a, T: MersenneField> {
     pub id: &'a str,
-
     pub private_values: HashMap<&'a str, T>,
-
     pub shares: HashMap<&'a str, Share<'a, T>>,
 }
 
@@ -47,7 +44,6 @@ where
         }
     }
 
-    
     pub fn get_share(&'a self, id: &'a str) -> &'b Share<'a, T> {
         if let Some(share) = self.shares.get(id) {
             share
