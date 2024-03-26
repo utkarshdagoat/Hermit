@@ -1,0 +1,18 @@
+workspace = { members = [ "cordinator","example"] }
+[package]
+name = "smpc"
+version = "0.1.1"
+edition = "2021"
+categories = ["cryptography"]
+keywords = ["mpc", "cryptography"]
+description = "A port of TinySMPC into Rust."
+license = "GPL-3.0-only"
+
+[dependencies]
+rand = "0.8.5"
+aes = "0.8.3"
+ctr = "0.9.2"
+katex-doc = "0.1.0"
+
+[package.metadata.docs.rs]
+rustdoc-args = [ "--html-in-header", "docs/katex-header.html" ]
