@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.10",
+    "clsx": "^2.1.0",
     "framer-motion": "^11.0.22",
+    "gsap": "^3.12.5",
+    "gsap-trial": "^3.12.5",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18"

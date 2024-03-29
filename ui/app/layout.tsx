@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-
-const inter = Inter({ subsets: ["latin"] });
+import { archivo } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Hermit",
-  description: "A decentralized SMPC platform for secure and private data analytics.",
+  description:
+    "A decentralized SMPC platform for secure and private data collaboration and AI analytics.",
 };
 
 export default function RootLayout({
@@ -17,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>
+      <body className={archivo.className}>
         <Providers>{children}</Providers>
       </body>
     </html>
