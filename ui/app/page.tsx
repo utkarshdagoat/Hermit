@@ -18,9 +18,9 @@ export default function Home() {
       defaults: { duration: 1, ease: "power4.out" },
     });
 
-    t1.to(description.current, { y: 0, opacity: 1 })
-      .to(heading.current, { opacity: 1, x: 0 }, "<0.5")
-      .to(background.current, { backgroundColor: "rgba(0, 0, 0, 0)" }, "<0.6")
+    t1.to(heading.current, { opacity: 1, x: 0 })
+      .to(description.current, { y: 0, opacity: 1 }, "<")   
+      .to(background.current, { backgroundColor: "rgba(0, 0, 0, 0)" }, "<0.8")
       .to(getStarted.current, { y: 0, opacity: 1 }, "<0.4");
   }, []);
 

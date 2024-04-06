@@ -12,13 +12,14 @@ export default function Page() {
     let t1 = gsap.timeline({
       defaults: { duration: 1, ease: "power4.out" },
     });
+
     t1.to(heading.current, { delay: 0.1, opacity: 1, x: 0 })
       .to(".form-stagger", { opacity: 1, y: 0, stagger: 0.2 }, "<0.2");
 
   }, []);
 
   return (
-    <div className="min-w-[50rem] flex flex-col gap-4">
+    <div className="min-w-[50rem] border-spacing-2 border-red-500 p-12 rounded-lg flex flex-col gap-4">
       <h1
         ref={heading}
         className="text-5xl translate-x-5 opacity-0 font-semibold underline underline-offset-5 decoration-6 decoration-primary-red lg:decoration-8"
