@@ -2,9 +2,10 @@
 
 import { montserrat } from "./fonts";
 import styles from "./home.module.css";
-import { Button } from "@nextui-org/react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { Button } from "@nextui-org/react";
+import Link from "next/link";
 
 export default function Home() {
   const heading = useRef(null);
@@ -14,13 +15,13 @@ export default function Home() {
 
   useEffect(() => {
     let t1 = gsap.timeline({
-      defaults: { duration: 1.5, ease: "power4.out" },
+      defaults: { duration: 1, ease: "power4.out" },
     });
 
-    t1.to(heading.current, { x: 0, opacity: 1 })
-      .to(description.current, { opacity: 1, y: 0 }, "<0.5")
-      .to(background.current, { backgroundColor: "rgba(0, 0, 0, 0)" })
-      .to(getStarted.current, { y: 0, opacity: 1 }, "<0.5");
+    t1.to(description.current, { y: 0, opacity: 1 })
+      .to(heading.current, { opacity: 1, x: 0 }, "<0.5")
+      .to(background.current, { backgroundColor: "rgba(0, 0, 0, 0)" }, "<0.6")
+      .to(getStarted.current, { y: 0, opacity: 1 }, "<0.4");
   }, []);
 
   return (
@@ -47,15 +48,16 @@ export default function Home() {
                 AI analytics.
               </span>{" "}
             </p>
-            <Button
-              ref={getStarted}
-              size="lg"
-              className="px-10 py-4 translate-y-11 opacity-0 font-semibold bg-primary-red uppercase tracking-wider self-center"
-              radius="full"
-              variant="shadow"
-            >
-              Get Started
-            </Button>
+            <Link href="/register">
+              <Button
+                ref={getStarted}
+                size="lg"
+                className="px-10 py-41 translate-y-11 opacity-0 font-semibold bg-primary-red uppercase tracking-wider self-center"
+                radius="full"
+              >
+                Get Started
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
