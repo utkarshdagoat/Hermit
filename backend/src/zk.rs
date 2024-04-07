@@ -38,10 +38,3 @@ pub fn verify_strings(str1: &str, str2: &str) -> bool {
     a == b
 }
 
-fn main() {
-    let str1 = "804b33542c3172aa05608e9d079e2a31726ace6dd4c78a130707862d76fbd30c";
-    let str2 = "sahil";
-
-    let result = verify_strings(str1, str2);
-    println!("Are strings equal? {}", result);
-}
