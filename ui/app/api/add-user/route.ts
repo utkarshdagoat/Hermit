@@ -1,4 +1,3 @@
-import Redis from 'ioredis';
 import { NextResponse } from 'next/server';
 import { newRedisInstance } from '@/app/lib/db/redis';
 
@@ -12,7 +11,7 @@ export async function POST(req: Request) {
         if (!email || !address) {
             return NextResponse.error();
         }
-        await redis.hmset(`email:${email}`, 'address', address, 'current', 1);
+        await redis.hmset(`email:${email}`, 'address', address, 'isLoggedIn', 1);
         return NextResponse.json({ success: true });
     } catch (error) {
         console.error('Error adding user:', error);

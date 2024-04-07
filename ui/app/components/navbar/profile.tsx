@@ -11,9 +11,19 @@ import {
 import { useAccount, useDisconnect } from "wagmi";
 import { Input } from "@nextui-org/react";
 
-export default function Profile() {
+interface ProfileProps {
+  email: string;
+  logout: () => void;
+}
+
+export default  function Profile(props: ProfileProps) {
   const { address } = useAccount();
-  const { disconnect } = useDisconnect();
+  const {disconnect} = useDisconnect()
+  const handleClick = async () => {
+    disconnect();
+    await props.logout()
+  }
+
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -21,18 +31,16 @@ export default function Profile() {
       </DropdownTrigger>
       <DropdownMenu>
         <DropdownItem key="email" className="inline-flex">
-          <span>abcd@gmail.com</span>
+          <span>{props.email}</span>
         </DropdownItem>
-        <DropdownItem key="copy">
+        <DropdownItem key="address">
           <Input readOnly value={address}></Input>
         </DropdownItem>
         <DropdownItem
           key="logout"
           className="text-danger"
           color="danger"
-          onClick={() => {
-            disconnect();
-          }}
+          onClick={handleClick}
         >
           Logout
         </DropdownItem>

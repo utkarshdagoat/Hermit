@@ -2,7 +2,12 @@ import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
 import Profile from "./profile";
 
-export default function NavBar() {
+interface NavBarProps {
+  email: string;
+  logout: () => void;
+}
+
+export default function NavBar(props:NavBarProps ) {
   return (
     <Navbar isBordered>
       <NavbarBrand>
@@ -11,8 +16,8 @@ export default function NavBar() {
       
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Profile />
-        </NavbarItem>
+          <Profile {...props}/>
+        </NavbarItem> 
       </NavbarContent>
     </Navbar>
   );
