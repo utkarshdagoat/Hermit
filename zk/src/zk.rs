@@ -5,6 +5,7 @@ use bellman::{
     Circuit, ConstraintSystem, SynthesisError,
 };
 use bls12_381::{Bls12, Scalar};
+
 use ff::{Field, PrimeField};
 
 use rand::rngs::OsRng;

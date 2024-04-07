@@ -1,6 +1,8 @@
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 mod zk;
+use actix_cors::Cors;
 use serde::Deserialize;
+use std::net::{IpAddr, Ipv4Addr};
 
 #[derive(Deserialize)]
 struct Sizes {
@@ -16,12 +18,29 @@ async fn zkverify(sizes: web::Json<Sizes>) -> impl Responder {
     }
 }
 
+fn get_local_ipv4_address() -> Result<IpAddr, Box<dyn std::error::Error>> {
+    let interfaces = pnet::datalink::interfaces();
+    for iface in interfaces {
+        for ip in iface.ips {
+            if ip.ip().is_ipv4() {
+                println!("{:?}" , ip.ip());
+                return Ok(ip.ip());
+            }
+        }
+    }
+
+    Err("IPv4 address not found".into())
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+   
     HttpServer::new(|| {
-        App::new().service(web::resource("/zkverify").route(web::post().to(zkverify)))
+        App::new()
+            .wrap(Cors::permissive())
+            .service(web::resource("/zkverify").route(web::post().to(zkverify)))
     })
-    .bind(("127.0.0.1", 8081))?
+    .bind(("0.0.0.0", 8081))?
     .run()
     .await
 }
