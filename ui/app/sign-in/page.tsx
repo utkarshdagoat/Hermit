@@ -2,13 +2,15 @@
 
 import { Input, Button, Image } from "@nextui-org/react";
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useRef, useState } from "react";
+import { useAccount, useConnect } from "wagmi";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const { address } = useAccount();
   const { connect, connectors } = useConnect();
+  const [email, setEmail] = useState("");
+  const router = useRouter();
 
   const heading = useRef(null);
   useEffect(() => {
@@ -24,8 +26,24 @@ export default function Page() {
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
+    if (!email || !address) return;
     e.preventDefault();
-    console.log("Submitted");
+    fetch("/api/add-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email, address: address }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("User added successfully");
+          router.push("/collaborate");
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to add user", error);
+      });
   };
 
   return (
@@ -34,14 +52,16 @@ export default function Page() {
         ref={heading}
         className="text-5xl translate-x-5 opacity-0 font-semibold underline underline-offset-5 decoration-6 decoration-primary-red lg:decoration-8"
       >
-        Register Yourself
+        Sign In
       </h1>
       <form onSubmit={handleSubmit}>
         <Input
           type="email"
           variant="underlined"
           placeholder="Your work email"
+          required
           size="lg"
+          onChange={(e) => setEmail(e.target.value)}
           className="form-stagger translate-y-5 opacity-0"
         />
         <div className="flex gap-8 mt-6">
@@ -51,6 +71,7 @@ export default function Page() {
             size="lg"
             value={address}
             readOnly
+            required
             placeholder="Your wallet address"
             className="form-stagger translate-y-5 opacity-0"
           />
@@ -73,10 +94,9 @@ export default function Page() {
           variant="solid"
           type="submit"
           size="lg"
-          className="bg-primary-red opacity-0 translate-y-100 hover:translate-y-2 form-stagger mt-4 mx-auto text-md px-6 py-2"
-          endContent={<FontAwesomeIcon icon={["fas", "arrow-right"]} />}
+          className="bg-primary-red opacity-0 uppercase font-semibold translate-y-100 hover:translate-y-2 form-stagger mt-4 mx-auto text-md px-6 py-2"
         >
-          Start Collaborative Analytics
+          Let's Go :)
         </Button>
       </form>
     </div>

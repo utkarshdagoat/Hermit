@@ -18,6 +18,7 @@
     "framer-motion": "^11.0.22",
     "gsap": "^3.12.5",
     "gsap-trial": "^3.12.5",
+    "ioredis": "^5.3.2",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",

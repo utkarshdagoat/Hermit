@@ -19,7 +19,7 @@ export default function Home() {
     });
 
     t1.to(heading.current, { opacity: 1, x: 0 })
-      .to(description.current, { y: 0, opacity: 1 }, "<")   
+      .to(description.current, { y: 0, opacity: 1 }, "<")
       .to(background.current, { backgroundColor: "rgba(0, 0, 0, 0)" }, "<0.8")
       .to(getStarted.current, { y: 0, opacity: 1 }, "<0.4");
   }, []);
@@ -35,6 +35,7 @@ export default function Home() {
             >
               Hermit
             </h1>
+
             <p
               ref={description}
               className="text-lg mx-auto mb-8 translate-y-5 opacity-0 text-foreground-600 font-semibold text-center line-clamp-3 w-[36ch] text-primary-yellow-200 lg:text-2xl"
@@ -48,7 +49,7 @@ export default function Home() {
                 AI analytics.
               </span>{" "}
             </p>
-            <Link href="/register">
+            <Link href="/sign-in">
               <Button
                 ref={getStarted}
                 size="lg"
