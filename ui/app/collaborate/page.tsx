@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -12,9 +12,11 @@ import {
   Input,
 } from "@nextui-org/react";
 import { uploadData } from "@/app/lib/ipfs/upload";
+import makeDeal from "./function";
 
 function Collaborate() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [cid , setCid] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [address, setAddress] = useState<string>("");
 
@@ -22,7 +24,9 @@ function Collaborate() {
     if (!file || !address) return;
     e.preventDefault();
     let cid = await uploadData(file);
-    console.log("CID: ", cid);
+    setCid(cid)
+    const ret = await makeDeal(cid)
+    console.log(ret);
   }
 
 
