@@ -2,22 +2,21 @@ use crate::math::mersenne::MersenneField;
 use crate::utils::prg::Prg;
 use crate::vm::VirtualMachine;
 
-pub struct Share<'a, T: MersenneField> {
-    pub id: &'a str,
+pub struct Share<T: MersenneField> {
+    pub id: u32,
     pub value: T,
 }
 
-impl<'a, T: MersenneField> Share<'a, T> {
-    fn new(id: &'a str, value: T) -> Self {
+impl<T: MersenneField> Share<T> {
+    fn new(id: u32, value: T) -> Self {
         Self { id, value }
     }
 }
 
-
 pub fn distribute_shares<'a, 'b, T>(
-    id_var: &'a str,
-    id_owner: &'a str,
-    parties: Vec<&'b mut VirtualMachine<'a, T>>,
+    id_var: u32,
+    id_owner: u32,
+    parties: Vec<&'b mut VirtualMachine<T>>,
     prg: &mut Prg,
 ) where
     T: MersenneField,
@@ -62,7 +61,7 @@ pub fn distribute_shares<'a, 'b, T>(
 /// the shares of the product under the ID `id_result` stored in the share
 /// memory.
 pub fn mult_protocol<'a, 'b, T>(
-    parties: &mut Vec<&'b mut VirtualMachine<'a, T>>,
+    parties: &mut Vec<&'b mut VirtualMachine<T>>,
     id_x: &'a str,
     id_y: &'a str,
     id_result: &'a str,
@@ -71,7 +70,6 @@ pub fn mult_protocol<'a, 'b, T>(
     T: MersenneField,
     'a: 'b,
 {
-
     subtract_protocol(&mut *parties, id_x, triple_id.0, "epsilon");
     subtract_protocol(&mut *parties, id_y, triple_id.1, "delta");
 
@@ -102,7 +100,7 @@ pub fn mult_protocol<'a, 'b, T>(
 pub fn distribute_pub_value<'a, 'b, T>(
     value: &T,
     id: &'a str,
-    parties: &mut [&'b mut VirtualMachine<'a, T>],
+    parties: &mut [&'b mut VirtualMachine<T>],
 ) where
     T: MersenneField,
     'a: 'b,
@@ -114,7 +112,7 @@ pub fn distribute_pub_value<'a, 'b, T>(
 }
 
 pub fn multiply_by_const_protocol<'a, 'b, T>(
-    parties: &mut Vec<&'b mut VirtualMachine<'a, T>>,
+    parties: &mut Vec<&'b mut VirtualMachine<T>>,
     value: &T,
     id: &'a str,
     id_result: &'a str,
@@ -131,9 +129,8 @@ pub fn multiply_by_const_protocol<'a, 'b, T>(
     }
 }
 
-
 pub fn subtract_protocol<'a, T>(
-    parties: &mut Vec<&mut VirtualMachine<'a, T>>,
+    parties: &mut Vec<&mut VirtualMachine<T>>,
     id_a: &'a str,
     id_b: &'a str,
     id_result: &'a str,
@@ -157,8 +154,8 @@ pub fn subtract_protocol<'a, T>(
 /// At the end of the execution of the protocol, the parties will end up with
 /// the shares of the addition under the ID `id_result` stored in the share
 /// memory.
-pub fn add_protocol<'a, T>( 
-    parties: &mut Vec<&mut VirtualMachine<'a, T>>,
+pub fn add_protocol<'a, T>(
+    parties: &mut Vec<&mut VirtualMachine<T>>,
     id_a: &'a str,
     id_b: &'a str,
     id_result: &'a str,
@@ -203,7 +200,7 @@ where
 /// computes additive shares of such triple. Those shares are stored in the
 /// share memory of each party with the provided ID tuple.
 pub fn generate_triple<'a, 'b, T>(
-    parties: &mut Vec<&'b mut VirtualMachine<'a, T>>,
+    parties: &mut Vec<&'b mut VirtualMachine<T>>,
     id_triple: (&'a str, &'a str, &'a str),
     prg: &mut Prg,
 ) where
@@ -227,7 +224,7 @@ pub fn generate_triple<'a, 'b, T>(
 /// of the provided value stored in the share memory under the provided ID.
 pub fn simulate_random_dist<'a, T>(
     id: &'a str,
-    parties: &mut Vec<&mut VirtualMachine<'a, T>>,
+    parties: &mut Vec<&mut VirtualMachine<T>>,
     value: &T,
     prg: &mut Prg,
 ) where
