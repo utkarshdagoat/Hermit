@@ -17,6 +17,3 @@ ff = "0.8.0"
 rand = "0.8"
 bls12_381 = "0.8.0"
 
-[[bin]]
-name = "zk1"
-path = "src/zk.rs"

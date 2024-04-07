@@ -54,9 +54,3 @@ pub fn verify_equality(a: u64, b: u64) -> bool {
 }
 
 
-fn main(){
-    let a:u64 = 128;
-    let b:u64= 120;
-    let bool1 = verify_equality(a,b);
-    println!("{}",bool1);
-}
