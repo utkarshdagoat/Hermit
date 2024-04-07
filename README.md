@@ -147,7 +147,7 @@ The choice of SFE protocol and secret sharing scheme impacts efficiency. Techniq
 ## Roadmap
 
 - [x] Add Changelog
-- [x] Add back to top links
+- [ ] Implment the Compiler in Rust
 - [ ] Add Additional Templates w/ Examples
 - [ ] Add "components" document to easily copy & paste sections of the readme
 
