@@ -1,3 +1,4 @@
+
 use smpc::{math::mersenne::MersenneField, vm::VirtualMachine};
 
 struct Cordinator<'a, T: MersenneField> {
@@ -9,4 +10,3 @@ impl<'a, T: MersenneField> Cordinator<'a, T> {
 }
 
 fn main() {}
-

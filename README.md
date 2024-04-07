@@ -1,1 +1,1 @@
-Enhancing AI privacy 
+Enhancing AI sharing privacy 
