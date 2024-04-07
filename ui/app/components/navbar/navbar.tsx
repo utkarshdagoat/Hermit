@@ -9,7 +9,7 @@ interface NavBarProps {
 
 export default function NavBar(props:NavBarProps ) {
   return (
-    <Navbar isBordered>
+    <Navbar className="fixed" isBordered>
       <NavbarBrand>
         <p className="font-bold text-inherit">HERMIT</p>
       </NavbarBrand>
@@ -20,5 +20,5 @@ export default function NavBar(props:NavBarProps ) {
         </NavbarItem> 
       </NavbarContent>
     </Navbar>
-  );
+  )
 }

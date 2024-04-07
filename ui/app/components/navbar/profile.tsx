@@ -16,7 +16,7 @@ interface ProfileProps {
   logout: () => void;
 }
 
-export default  function Profile(props: ProfileProps) {
+export default function Profile(props: ProfileProps) {
   const { address } = useAccount();
   const {disconnect} = useDisconnect()
   const handleClick = async () => {
