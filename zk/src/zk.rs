@@ -1,40 +1,62 @@
-use num_bigint::{BigUint, ToBigUint};
+use bellman::{
+    groth16::{
+        self, create_random_proof, generate_random_parameters, prepare_verifying_key, verify_proof,
+    },
+    Circuit, ConstraintSystem, SynthesisError,
+};
+use bls12_381::{Bls12, Scalar};
+use ff::{Field, PrimeField};
 
-/// Hash a string into a BigUint (not using real hashing for simplicity)
-fn hash_to_biguint(input: &str) -> BigUint {
-    input.len().to_biguint().unwrap()
+use rand::rngs::OsRng;
+
+// Circuit for checking equality of two integers
+struct EqualityCircuit {
+    a: Option<Scalar>,
+    b: Option<Scalar>,
 }
 
-/// Chaum Pederson Protocol: Verify whether two hashed values are equal
-pub fn verify_strings(str1: &str, str2: &str) -> bool {
-    // Hash the input strings
-    let hash1 = hash_to_biguint(str1);
-    let hash2 = hash_to_biguint(str2);
+impl Circuit<Scalar> for EqualityCircuit {
+    fn synthesize<CS: ConstraintSystem<Scalar>>(self, cs: &mut CS) -> Result<(), SynthesisError> {
+        let a = cs.alloc(|| "a", || self.a.ok_or(SynthesisError::AssignmentMissing))?;
+        let b = cs.alloc(|| "b", || self.b.ok_or(SynthesisError::AssignmentMissing))?;
+        let one = CS::one();
+        // Enforce equality constraint: a == b
+        cs.enforce(
+            || "equality constraint",
+            |lc| lc + a,
+            |lc| lc + one, // Use Scalar::one() instead of Fr::one()
+            |lc| lc + b,
+        );
 
-    // Fixed commitment values (for simplicity)
-    let g = BigUint::from(2u32);
-    let h = BigUint::from(3u32);
-    let x = BigUint::from(4u32);
-    let r = BigUint::from(5u32);
-    let y1 = g.modpow(&x, &hash1);
-    let y2 = g.modpow(&x, &hash2);
-
-    // Check if the commitment values are equal
-    if y1 != y2 {
-        return false; // Return false if the commitment values are not equal
+        Ok(())
     }
-
-    // Generate a random value for the challenge (for demonstration purposes)
-    let c = BigUint::from(6u32);
-
-    // Calculate the response values
-    let s = (&r + &c * &x) % &hash1;
-    let s_prime = (&r + &c * &x) % &hash2;
-
-    // Verify if the responses are valid
-    let a = (g.modpow(&s, &hash1) * h.modpow(&c, &hash1)) % &hash1;
-    let b = (g.modpow(&s_prime, &hash2) * h.modpow(&c, &hash2)) % &hash2;
-
-    a == b
 }
 
+// Function to verify equality of two integers using zk-SNARK
+pub fn verify_equality(a: u64, b: u64) -> bool {
+    
+    let params =
+        generate_random_parameters::<Bls12, _, _>(EqualityCircuit { a: None, b: None }, &mut OsRng)
+            .unwrap();
+
+    
+    let pvk = groth16::prepare_verifying_key(&params.vk);
+
+    
+    let c = EqualityCircuit {
+        a: Some(Scalar::from(a)), // Convert u64 to Scalar
+        b: Some(Scalar::from(b)), // Convert u64 to Scalar
+    };
+
+    let proof = groth16::create_random_proof(c, &params, &mut OsRng).unwrap();
+
+    groth16::verify_proof(&pvk, &proof, &[]).is_ok()
+}
+
+
+fn main(){
+    let a:u64 = 128;
+    let b:u64= 120;
+    let bool1 = verify_equality(a,b);
+    println!("{}",bool1);
+}

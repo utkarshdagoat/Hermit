@@ -3,13 +3,13 @@ mod zk;
 use serde::Deserialize;
 
 #[derive(Deserialize)]
-struct Hashes {
-    hash1: String,
-    hash2: String,
+struct Sizes {
+    size1: u64,
+    size2: u64,
 }
 
-async fn zkverify(hashes: web::Json<Hashes>) -> impl Responder {
-    if zk::verify_strings(&hashes.hash1, &hashes.hash2) {
+async fn zkverify(sizes: web::Json<Sizes>) -> impl Responder {
+    if zk::verify_equality(sizes.size1, sizes.size2) {
         HttpResponse::Ok().body("verified")
     } else {
         HttpResponse::Ok().body("not-verified")
