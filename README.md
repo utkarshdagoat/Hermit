@@ -155,7 +155,11 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Usage 
 
+Imagine you're building a model to classify handwritten digits (0-9). Each row represents a flattened image of a digit, with the four features capturing characteristics like pixel intensities in different regions. The fifth element would then indicate the actual digit (0, 1, 2, etc.).
+
+we are taking this dataset as our input dataset for the smpc training and outputting the Decision tree made along with their node id's and other relevant data.
 
 <!-- CONTRIBUTING -->
 ## Contributing
