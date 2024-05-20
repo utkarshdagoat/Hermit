@@ -9,6 +9,7 @@
   </a>
 
   <h3 align="center">Hermit</h3>
+  <h4>Runner Up of <a href="https://dorahacks.io/hackathon/filecoin-data-economy/results>Filecoin Data economy hackathon</a></h4>
 
   <p align="center">
     A <b>Secure MutltiParty Computation Collaboration</b> Platform build on top of Filecoin to enhance AI privacy.
