@@ -9,7 +9,7 @@
   </a>
 
   <h3 align="center">Hermit</h3>
-  <h4>Runner Up of <a href="https://dorahacks.io/hackathon/filecoin-data-economy/results>Filecoin Data economy hackathon</a></h4> <br>
+  
 
   <p align="center">
     A <b>Secure MutltiParty Computation Collaboration</b> Platform build on top of Filecoin to enhance AI privacy.
@@ -54,7 +54,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
+##### Runner Ups of ![File Coin Data Economy Hackathon](https://dorahacks.io/hackathon/filecoin-data-economy/results) 🚀 4️⃣
 ![Product Name Screen Shot][product-screenshot]
 
 The need for collaborative data analysis in today's networked world is evident in a variety of industries, including healthcare and finance. However, the overriding concern for data security and privacy frequently stymies this requirement for cooperation. This is where Secure Multi-Party Computation (SMPC) shines as a solution that allows for collaboration while protecting private data using cryptographic methods. However, the scalability, efficiency, and ease of integration of current Coll frameworks are frequently lacking. 
