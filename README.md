@@ -54,7 +54,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-##### Runner Ups of ![File Coin Data Economy Hackathon](https://dorahacks.io/hackathon/filecoin-data-economy/results) 🚀 4️⃣
+##### Runner Ups of <a href="https://dorahacks.io/hackathon/filecoin-data-economy/results">File Coin Data Economy Hackathon </a> 🚀 4️⃣
 
 The need for collaborative data analysis in today's networked world is evident in a variety of industries, including healthcare and finance. However, the overriding concern for data security and privacy frequently stymies this requirement for cooperation. This is where Secure Multi-Party Computation (SMPC) shines as a solution that allows for collaboration while protecting private data using cryptographic methods. However, the scalability, efficiency, and ease of integration of current Coll frameworks are frequently lacking. 
 Presenting **THE HERMIT**—a novel SMPC solution painstakingly designed to confront these issues head-on. **THE HERMIT** promises to transform collaborative data analysis in the digital era by providing strong privacy guarantees, unmatched scalability, and smooth integration capabilities. Privacy and security are always guaranteed.
